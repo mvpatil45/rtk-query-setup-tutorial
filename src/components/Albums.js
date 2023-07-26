@@ -1,22 +1,19 @@
-import React, { useState } from 'react';
-import {
-  useDeleteAlbumMutation,
-  useGetAlbumsQuery,
-} from '../app/services/jsonServerApi';
+import React from 'react';
+import {useGetAlbumsQuery} from '../app/services/jsonServerApi';
 
 export default function Albums(props) {
-  const { setSelectedAlbum } = props;
+  // const { setSelectedAlbum } = props;
 
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const {
     data: albums = [],
     isLoading,
     isFetching,
     isError,
     error,
-  } = useGetAlbumsQuery(page);
+  } = useGetAlbumsQuery();
 
-  const [deleteAlbum] = useDeleteAlbumMutation();
+  // const [deleteAlbum] = useDeleteAlbumMutation();
 
   if (isLoading || isFetching) {
     return <div>loading...</div>;
@@ -31,14 +28,14 @@ export default function Albums(props) {
     <div>
       <ul>
         {albums.map((album) => (
-          <li key={album.id}>
+          <ul key={album.id}>
             {album.id} - {album.title}{' '}
-            <button onClick={() => setSelectedAlbum(album)}>edit</button>{' '}
-            <button onClick={() => deleteAlbum(album.id)}>delete</button>
-          </li>
+            {/* <button onClick={() => setSelectedAlbum(album)}>edit</button>{' '} */}
+            {/* <button onClick={() => deleteAlbum(album.id)}>delete</button> */}
+          </ul>
         ))}
       </ul>
-      <button disabled={page <= 1} onClick={() => setPage((prev) => prev - 1)}>
+      {/* <button disabled={page <= 1} onClick={() => setPage((prev) => prev - 1)}>
         Prev
       </button>
       <button
@@ -46,7 +43,7 @@ export default function Albums(props) {
         onClick={() => setPage((prev) => prev + 1)}
       >
         Next
-      </button>
+      </button> */}
     </div>
   );
 }
